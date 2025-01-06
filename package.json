@@ -5,14 +5,41 @@
   "main": "server/index.js",
   "scripts": {
     "test": "mocha tests/**/*.test.js",
-    "build": "cd web && npm install && npm run build",
+    "build": "npm run clean && npm run format && npm run lint && npm run build:all",
+    "build:all": "npm run build:ts && npm run build:web",
+    "build:ts": "tsc",
+    "build:web": "cd web && npm install && npm run build",
     "postinstall": "cd web && npm install",
-    "dev": "concurrently \"cd web && npm start\" \"nodemon server/index.js\"",
-    "start": "node server/index.js"
+    "dev": "concurrently \"npm run dev:ts\" \"npm run dev:web\" \"npm run dev:server\"",
+    "dev:ts": "tsc --watch",
+    "dev:web": "cd web && npm start",
+    "dev:server": "nodemon dist/server/index.js",
+    "start": "node dist/server/index.js",
+    "clean": "rimraf dist",
+    "lint": "eslint . --ext .ts,.js",
+    "lint:fix": "eslint . --ext .ts,.js --fix",
+    "format": "prettier --write \"**/*.{ts,js,json,md,lua}\"",
+    "format:check": "prettier --check \"**/*.{ts,js,json,md,lua}\"",
+    "type-check": "tsc --noEmit",
+    "prepare": "npm run build",
+    "migrate": "node tools/migrate.js",
+    "migrate:verify": "node tools/verify.js",
+    "migrate:all": "npm run migrate && npm run migrate:verify",
+    "migrate:init": "cp migration-config.example.json migration-config.json",
+    "backup": "node tools/backup.js",
+    "backup:list": "node tools/backup.js list",
+    "backup:create": "node tools/backup.js create",
+    "db:status": "node -e \"require('./tools/verify.js').verify()\"",
+    "db:info": "node -e \"require('./tools/backup.js').listBackups(); require('./tools/verify.js').verify()\"",
+    "schema:create": "node tools/schema.js create",
+    "schema:migrate": "node tools/schema.js migrate",
+    "schema:verify": "node tools/schema.js verify",
+    "schema:status": "node tools/schema.js status",
+    "db:setup": "npm run migrate:init && npm run migrate:all && npm run schema:migrate"
   },
   "dependencies": {
     "duckdb": "^0.9.1",
-    "fivem-server-utils": "^1.0.0",
+    "@citizenfx/server": "^2.0.0",
     "express": "^4.18.2",
     "cors": "^2.8.5",
     "mysql2": "^3.6.1"
@@ -21,9 +48,31 @@
     "mocha": "^10.2.0",
     "chai": "^4.3.10",
     "concurrently": "^8.2.1",
-    "nodemon": "^3.0.1"
+    "nodemon": "^3.0.1",
+    "typescript": "^5.2.2",
+    "@types/node": "^20.8.0",
+    "@citizenfx/client": "^2.0.0",
+    "@citizenfx/server": "^2.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.7.0",
+    "@typescript-eslint/parser": "^6.7.0",
+    "eslint": "^8.49.0",
+    "prettier": "^3.0.3",
+    "rimraf": "^5.0.1",
+    "@types/mocha": "^10.0.1",
+    "@types/chai": "^4.3.6"
   },
   "bin": {
     "duckdb-migrate": "./tools/migrate.js"
+  },
+  "types": "types/index.d.ts",
+  "files": [
+    "server",
+    "client",
+    "web/build",
+    "types",
+    "tools"
+  ],
+  "engines": {
+    "node": ">=16.0.0"
   }
 }

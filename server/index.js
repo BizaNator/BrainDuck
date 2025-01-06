@@ -1,9 +1,19 @@
 const duckdb = require('duckdb');
 const path = require('path');
 
+// Get the resource path using FiveM native functions
+const resourcePath = global.GetResourcePath ? 
+    global.GetResourcePath(global.GetCurrentResourceName()) :
+    process.cwd();
+
 // Initialize DuckDB with a persistent database file
-const dbPath = path.join(GetResourcePath(GetCurrentResourceName()), 'database.duckdb');
+const dbPath = path.join(resourcePath, 'database.duckdb');
 const db = new duckdb.Database(dbPath);
+
+// Set up error handling
+db.on('error', (err) => {
+    console.error('DuckDB error:', err);
+});
 
 // Core query execution function
 async function executeQuery(query, params = []) {

@@ -1,25 +1,52 @@
 local isUIOpen = false
+local resourceName = GetCurrentResourceName()
 
 -- Check if player has database admin permissions
 local function hasDBPermission()
-    return IsPlayerAceAllowed(PlayerId(), "db.admin")
+    if not IsDuplicityVersion() then -- Ensure we're on the client side
+        local playerId = PlayerId()
+        if not playerId then return false end
+        return IsPlayerAceAllowed(playerId, "db.admin")
+    end
+    return false
+end
+
+-- Notification helper
+local function notify(type, message)
+    if type == 'error' then
+        TriggerEvent('chat:addMessage', {
+            color = {255, 0, 0},
+            args = {'Database', message}
+        })
+    else
+        TriggerEvent('chat:addMessage', {
+            color = {0, 255, 0},
+            args = {'Database', message}
+        })
+    end
 end
 
 -- Toggle UI visibility
 local function toggleUI()
     if not hasDBPermission() then
-        TriggerEvent('chat:addMessage', {
-            color = {255, 0, 0},
-            args = {'System', 'You do not have permission to access the database management UI.'}
-        })
+        notify('error', 'You do not have permission to access the database management UI.')
+        return
+    end
+
+    -- Ensure we're not in a cutscene or similar
+    if IsPauseMenuActive() or IsPlayerDead(PlayerId()) then
+        notify('error', 'Cannot open database UI in this state.')
         return
     end
 
     isUIOpen = not isUIOpen
     SetNuiFocus(isUIOpen, isUIOpen)
+    SetNuiFocusKeepInput(false) -- Disable game input while UI is open
+    
     SendNUIMessage({
         type = "toggleUI",
-        show = isUIOpen
+        show = isUIOpen,
+        version = GetResourceMetadata(resourceName, 'version', 0)
     })
 end
 

@@ -1,0 +1,23 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "sumneko.lua",
+    "eamodio.gitlens",
+    "gruntfuggly.todo-tree",
+    "christian-kohler.npm-intellisense",
+    "eg2.vscode-npm-script",
+    "mikestead.dotenv",
+    "editorconfig.editorconfig",
+    "github.vscode-pull-request-github",
+    "formulahendry.auto-rename-tag",
+    "streetsidesoftware.code-spell-checker",
+    "naumovs.color-highlight",
+    "ms-vscode.vscode-typescript-next"
+  ],
+  "unwantedRecommendations": [
+    "hookyqr.beautify",
+    "dbaeumer.jshint",
+    "ms-vscode.vscode-typescript-tslint-plugin"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+    "host": "localhost",
+    "user": "root",
+    "password": "",
+    "database": "braindeadrp",
+    "port": 3306,
+    "options": {
+        "createBackup": true,
+        "backupPath": "./backups",
+        "verifyMigration": true,
+        "skipTables": [
+            "migrations",
+            "temp_logs"
+        ],
+        "timeout": 300000
+    },
+    "logging": {
+        "level": "info",
+        "file": "./logs/migration.log",
+        "console": true
+    }
+}
