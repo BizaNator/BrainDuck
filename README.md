@@ -244,46 +244,25 @@ The resource includes full TypeScript definitions for both server-side and clien
    npm run prepare
    ```
 
-   The validation process checks for:
-   - Required Lua tools (luac, luacheck)
-   - Configuration files
-   - FiveM Lua files
-   - VS Code extensions
-   - Syntax validation
+   Required VS Code Extensions:
+   1. **Lua Development**:
+      - `sumneko.lua` (Lua Language Server) for FiveM development
+      - `actboy168.lua-debug` for debugging Lua scripts
 
-   If validation fails, you may need to:
-   1. Install Lua: https://www.lua.org/download.html
-   2. Install luacheck: `luarocks install luacheck`
-   3. Install VS Code extensions:
-      - Lua Language Server
-      - Lua Debug
-      - Lua Format
-   4. Ensure all configuration files are present
-   5. Fix any Lua syntax errors
+   The Lua Language Server will automatically:
+   - Check syntax
+   - Provide IntelliSense
+   - Show FiveM natives documentation
+   - Format Lua files
+   - Detect errors
 
-2. **Lua Development**:
+   No additional Lua tools are required as VS Code handles everything.
+
+2. **Database & TypeScript Development**:
    ```bash
-   # Check Lua syntax
-   npm run luacheck
-
-   # Format Lua files
-   npm run format:lua
-
-   # Verify Lua files
-   npm run build:lua
+   # Start development server
+   npm run dev
    ```
-
-   Required VS Code extensions for Lua:
-   - `sumneko.lua` (Lua Language Server)
-   - `trixnz.vscode-lua` (Lua Debug)
-   - `actboy168.lua-format` (Lua Formatter)
-
-   The project includes:
-   - Lua syntax checking
-   - FiveM natives support
-   - Auto-formatting
-   - Code quality checks
-   - Integration with TypeScript
 
 2. **Development Workflow**:
    ```bash
@@ -484,17 +463,54 @@ exports['duckdb-handler']:scalar("SELECT COUNT(*) FROM users")
 
 ## Development
 
-### Running in Development Mode
+### Prerequisites
 
-```bash
-npm run dev
-```
+1. **VS Code Extensions**:
+   - `sumneko.lua` (Lua Language Server) for FiveM Lua development
+   - `actboy168.lua-debug` for Lua debugging
+   - `dbaeumer.vscode-eslint` for TypeScript/JavaScript linting
+   - `esbenp.prettier-vscode` for code formatting
 
-### Running Tests
+### Development Workflow
 
-```bash
-npm test
-```
+1. **Initial Setup**:
+   ```bash
+   # Install dependencies
+   npm install
+
+   # Start development
+   npm run dev
+   ```
+
+2. **Project Structure**:
+   - `client/`: FiveM client-side Lua scripts
+   - `server/`: Server-side TypeScript code for DuckDB handling
+   - `web/`: Web UI for database management
+   - `migrations/`: Database schema migrations
+
+3. **Development Tips**:
+   - Lua files are handled by VS Code's Lua Language Server
+   - TypeScript/JavaScript files use ESLint and Prettier
+   - Database migrations use the schema versioning system
+   - UI changes hot-reload during development
+
+### Testing
+
+1. **Running Tests**:
+   ```bash
+   # Run all tests
+   npm test
+
+   # Run specific test suite
+   npm test tests/db.test.js
+   ```
+
+2. **What's Tested**:
+   - Database operations and queries
+   - Migration processes
+   - Data type compatibility
+   - Export compatibility with mysql-async/oxmysql
+   - Schema versioning
 
 ## Compatibility Notes
 

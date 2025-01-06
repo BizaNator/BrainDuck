@@ -6,15 +6,6 @@ web/node_modules/
 dist/
 web/build/
 *.tsbuildinfo
-*.luac
-luac.out
-
-# Lua specific
-.lua-cache/
-*.luacov
-*.luacov.stats.out
-*.luacheckrc.out
-
 # Database files
 *.duckdb
 *.duckdb.wal
