@@ -2,11 +2,13 @@
   "root": true,
   "parser": "@typescript-eslint/parser",
   "plugins": [
-    "@typescript-eslint"
+    "@typescript-eslint",
+    "lua"
   ],
   "extends": [
     "eslint:recommended",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended",
+    "plugin:lua/recommended"
   ],
   "parserOptions": {
     "ecmaVersion": 2020,
@@ -40,5 +42,38 @@
     "dist",
     "web/build",
     "node_modules"
+  ],
+  "settings": {
+    "lua": {
+      "globals": [
+        "source",
+        "GetCurrentResourceName",
+        "RegisterCommand",
+        "RegisterNetEvent",
+        "AddEventHandler",
+        "TriggerEvent",
+        "TriggerClientEvent",
+        "TriggerServerEvent",
+        "IsPlayerAceAllowed",
+        "PlayerId",
+        "SetNuiFocus",
+        "SendNUIMessage",
+        "RegisterNUICallback",
+        "RegisterKeyMapping",
+        "IsPauseMenuActive",
+        "IsPlayerDead",
+        "GetResourceMetadata"
+      ]
+    }
+  },
+  "overrides": [
+    {
+      "files": ["*.lua"],
+      "parser": "lua-eslint",
+      "rules": {
+        "@typescript-eslint/explicit-module-boundary-types": "off",
+        "@typescript-eslint/no-explicit-any": "off"
+      }
+    }
   ]
 }

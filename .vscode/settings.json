@@ -14,8 +14,39 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[lua]": {
-    "editor.defaultFormatter": "sumneko.lua"
+    "editor.defaultFormatter": "sumneko.lua",
+    "editor.formatOnSave": true,
+    "editor.tabSize": 4,
+    "editor.detectIndentation": false,
+    "editor.insertSpaces": true,
+    "files.eol": "\n"
   },
+  "Lua.diagnostics.globals": [
+    "source",
+    "GetCurrentResourceName",
+    "RegisterCommand",
+    "RegisterNetEvent",
+    "AddEventHandler",
+    "TriggerEvent",
+    "TriggerClientEvent",
+    "TriggerServerEvent",
+    "IsPlayerAceAllowed",
+    "PlayerId",
+    "SetNuiFocus",
+    "SendNUIMessage",
+    "RegisterNUICallback",
+    "RegisterKeyMapping",
+    "IsPauseMenuActive",
+    "IsPlayerDead",
+    "GetResourceMetadata"
+  ],
+  "Lua.workspace.library": [
+    "${3rd}/CFXLua/library",
+    "${3rd}/FiveM/library"
+  ],
+  "Lua.runtime.version": "LuaJIT",
+  "Lua.workspace.checkThirdParty": false,
+  "Lua.telemetry.enable": false,
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "files.exclude": {

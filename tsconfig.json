@@ -31,6 +31,20 @@
   "exclude": [
     "node_modules",
     "web",
-    "dist"
-  ]
+    "dist",
+    "**/*.lua",
+    "client",
+    "migrations"
+  ],
+  "ts-node": {
+    "files": true,
+    "transpileOnly": true
+  },
+  "watchOptions": {
+    "watchFile": "useFsEvents",
+    "watchDirectory": "useFsEvents",
+    "fallbackPolling": "dynamicPriority",
+    "synchronousWatchDirectory": true,
+    "excludeDirectories": ["**/node_modules", "dist", "client", "web/build"]
+  }
 }

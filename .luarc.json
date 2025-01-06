@@ -1,0 +1,57 @@
+{
+  "runtime": {
+    "version": "LuaJIT",
+    "path": [
+      "?.lua",
+      "?/init.lua",
+      "lua/?.lua",
+      "lua/?/init.lua",
+      "client/?.lua",
+      "server/?.lua"
+    ]
+  },
+  "workspace": {
+    "library": [
+      "${3rd}/CFXLua/library",
+      "${3rd}/FiveM/library"
+    ],
+    "checkThirdParty": false,
+    "maxPreload": 2000,
+    "preloadFileSize": 1000
+  },
+  "diagnostics": {
+    "globals": [
+      "source",
+      "GetCurrentResourceName",
+      "RegisterCommand",
+      "RegisterNetEvent",
+      "AddEventHandler",
+      "TriggerEvent",
+      "TriggerClientEvent",
+      "TriggerServerEvent",
+      "IsPlayerAceAllowed",
+      "PlayerId",
+      "SetNuiFocus",
+      "SendNUIMessage",
+      "RegisterNUICallback",
+      "RegisterKeyMapping",
+      "IsPauseMenuActive",
+      "IsPlayerDead",
+      "GetResourceMetadata"
+    ],
+    "disable": [
+      "lowercase-global"
+    ]
+  },
+  "format": {
+    "defaultConfig": {
+      "indent_style": "space",
+      "indent_size": "4",
+      "continuation_indent": "8",
+      "align_args": true,
+      "align_parameter": true,
+      "align_table_field": true,
+      "max_line_length": "120"
+    }
+  }
+}

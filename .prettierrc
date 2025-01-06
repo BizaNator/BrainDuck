@@ -10,9 +10,14 @@
     {
       "files": ["*.lua"],
       "options": {
+        "parser": "lua",
         "tabWidth": 4,
-        "singleQuote": false
-      }
+        "singleQuote": false,
+        "trailingComma": "none",
+        "bracketSpacing": true,
+        "endOfLine": "lf"
+      },
+      "plugins": ["prettier-plugin-lua"]
     },
     {
       "files": ["*.json", "*.md"],

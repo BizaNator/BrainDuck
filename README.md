@@ -237,9 +237,53 @@ The resource includes full TypeScript definitions for both server-side and clien
    # Install dependencies
    npm install
 
+   # Validate development environment
+   npm run validate
+
    # Install git hooks for code quality
    npm run prepare
    ```
+
+   The validation process checks for:
+   - Required Lua tools (luac, luacheck)
+   - Configuration files
+   - FiveM Lua files
+   - VS Code extensions
+   - Syntax validation
+
+   If validation fails, you may need to:
+   1. Install Lua: https://www.lua.org/download.html
+   2. Install luacheck: `luarocks install luacheck`
+   3. Install VS Code extensions:
+      - Lua Language Server
+      - Lua Debug
+      - Lua Format
+   4. Ensure all configuration files are present
+   5. Fix any Lua syntax errors
+
+2. **Lua Development**:
+   ```bash
+   # Check Lua syntax
+   npm run luacheck
+
+   # Format Lua files
+   npm run format:lua
+
+   # Verify Lua files
+   npm run build:lua
+   ```
+
+   Required VS Code extensions for Lua:
+   - `sumneko.lua` (Lua Language Server)
+   - `trixnz.vscode-lua` (Lua Debug)
+   - `actboy168.lua-format` (Lua Formatter)
+
+   The project includes:
+   - Lua syntax checking
+   - FiveM natives support
+   - Auto-formatting
+   - Code quality checks
+   - Integration with TypeScript
 
 2. **Development Workflow**:
    ```bash
